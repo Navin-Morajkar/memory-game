@@ -4,14 +4,14 @@ import { useEffect, useState } from 'react';
 import SingleCard from './components/SingleCard';
 
 const cardImages= [
-  {"src" : "/images/1.png"},
-  {"src" : "/images/2.png"},
-  {"src" : "/images/3.png"},
-  {"src" : "/images/4.png"},
-  {"src" : "/images/5.png"},
-  {"src" : "/images/6.png"},
-  {"src" : "/images/7.png"},
-  {"src" : "/images/8.png"}
+  {"src" : "/images/1.png", matched: false},
+  {"src" : "/images/2.png", matched: false},
+  {"src" : "/images/3.png", matched: false},
+  {"src" : "/images/4.png", matched: false},
+  {"src" : "/images/5.png", matched: false},
+  {"src" : "/images/6.png", matched: false},
+  {"src" : "/images/7.png", matched: false},
+  {"src" : "/images/8.png", matched: false}
 ]
 
 function App() {
@@ -20,9 +20,14 @@ function App() {
   const [turns, setTurns] = useState(0)
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [disabled, setdisabled] = useState(false)
 
   //Shuffle
   const shuffleCards = () => {
+    
+    setChoiceOne(null)
+    setChoiceTwo(null)
+
     const shuffledCards = [...cardImages,...cardImages]
       .sort(() => Math.random() - 0.5)
       .map((card) => ({...card, id:Math.random() }))
@@ -42,20 +47,38 @@ function App() {
 
   //Compare cards
   useEffect(() => {
+    
     if (choiceOne && choiceTwo) {
+      setdisabled(true)
+
       if(choiceOne.src === choiceTwo.src) {
-        console.log("Match")
+        //console.log("Match")
+        setCards(prevCards => {
+          return prevCards.map(card =>{
+            if (card.src === choiceOne.src) {
+              return {...card, matched:true}
+            } else {
+              return card
+            }
+          })
+        })
         resetChoice()
+      } else{
+        //console.log("No Match")
+        setTimeout(() => resetChoice(), 1000)
       }
     }
 
   }, [choiceOne, choiceTwo])
+
+  console.log(cards)
 
   //reset choices and add nos of moves
   const resetChoice = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
+    setdisabled(false)
   }
 
   return (
@@ -71,10 +94,13 @@ function App() {
           <SingleCard 
             key={card.id} 
             card={card}
-            handleChoice={handleChoice} 
+            handleChoice={handleChoice}
+            flipped= {card === choiceOne || card === choiceTwo || card.matched}
+            disabled = {disabled}
           />
         ))}
       </div>
+      <p>Turns: {turns}</p>
       
     </div>
    
