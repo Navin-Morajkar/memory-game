@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 const HighScores = ({ userInputs }) => {
@@ -26,6 +27,10 @@ const HighScores = ({ userInputs }) => {
                     ))}
                 </tbody>
             </table>
+                        
+            <Link to="/enter-data">
+                <button>New Game</button>
+            </Link>
         </div>
     );
 }

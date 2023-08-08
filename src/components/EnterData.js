@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import HighScores from './HighScores';
 import { Link } from 'react-router-dom';
 
@@ -6,17 +7,22 @@ const EnterData = ({ userInputs, setUserInputs }) => {
     const [name, setName] = useState('');
     const [difficulty, setDifficulty] = useState('');
     const [score, setScore] = useState(0);
+    const navigate = useNavigate();
     //const [userInputs, setUserInputs] = useState([]);
   
     const handleSubmit = (e) => {
       e.preventDefault();
       const userInput = { name, difficulty, score };
       setUserInputs((prevUserInputs) => [...prevUserInputs, userInput]);
+
+      // Navigate to the "/game" route after submitting the form
+      navigate('/game');
   
       // Clear the input fields after submission
       setName('');
       setDifficulty('');
       setScore(0);
+
     };
   
     useEffect(() => {
@@ -48,8 +54,8 @@ const EnterData = ({ userInputs, setUserInputs }) => {
                     required
                     type="number"
                     id="numberInput"
-                    min={2} max={50}
-                    step={2}
+                    min={1} max={25}
+                    step={1}
                     value={difficulty}
                     onChange={(e) => setDifficulty(e.target.value)}
                     
