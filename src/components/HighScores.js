@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const HighScores = ({ userInputs }) => {
+const HighScores = () => {
 
+    const [getInputs, setGetInputs] = useState([]);
+
+    useEffect(() => {
+        // Fetch userInputs from localStorage
+        const getInputsFromStorage = JSON.parse(localStorage.getItem('userInputs'));
+        setGetInputs(getInputsFromStorage);
+    }, []);
     
 
     return (  
@@ -18,7 +25,7 @@ const HighScores = ({ userInputs }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {userInputs.map((input, index) => (
+                    {getInputs.map((input, index) => (
                     <tr key={index}>
                         <td>{input.name}</td>
                         <td>{input.score}</td>

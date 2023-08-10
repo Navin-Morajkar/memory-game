@@ -8,34 +8,30 @@ const EnterData = ({ userInputs, setUserInputs }) => {
     const [difficulty, setDifficulty] = useState('');
     const [score, setScore] = useState(0);
     const navigate = useNavigate();
-    //const [userInputs, setUserInputs] = useState([]);
   
     const handleSubmit = (e) => {
       e.preventDefault();
       const userInput = { name, difficulty, score };
       setUserInputs((prevUserInputs) => [...prevUserInputs, userInput]);
-
-      // Navigate to the "/game" route after submitting the form
-      navigate('/game');
   
       // Clear the input fields after submission
       setName('');
       setDifficulty('');
       setScore(0);
 
+      //localStorage.setItem('userInputs', JSON.stringify(userInputs));
+        
+      // Navigate to the "/game" route after submitting the form
+      navigate('/game');
     };
-  
-    useEffect(() => {
-      // Store the updated userInputs array in localStorage whenever it changes
-      localStorage.setItem('userInputs', JSON.stringify(userInputs));
-  
-      // Log the updated userInputs array after the state has been updated
-      //console.log(userInputs);
-    }, [userInputs]);   
+    
+    // useEffect(() => {
+    //     console.log("test");
+    //     localStorage.setItem('userInputs', JSON.stringify(userInputs));
+    // }, [userInputs]);      
 
     return (  
         <div>
-
             <h2>Enter Data </h2>
 
             <form onSubmit={handleSubmit}>
@@ -57,19 +53,14 @@ const EnterData = ({ userInputs, setUserInputs }) => {
                     min={1} max={25}
                     step={1}
                     value={difficulty}
-                    onChange={(e) => setDifficulty(e.target.value)}
-                    
+                    onChange={(e) => setDifficulty(e.target.value)}                    
                 />
-                <button>Submit</button>
-                
+                <button>Submit</button>                
             </form>
             
             <Link to="/high-scores">
                 <button>View High Scores</button>
-            </Link>
-            {/* <p>{name}</p>
-            <p>{difficulty}</p> */}
-            
+            </Link>           
         </div>
     );
 }

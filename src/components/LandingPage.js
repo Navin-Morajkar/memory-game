@@ -8,7 +8,6 @@ const LandingPage = () => {
       <h2>Welcome to Memory Game</h2>
       <Link to="/enter-data">
         <Button type="primary">New Game</Button>
-        
       </Link>
 
       <Link to="/high-scores">

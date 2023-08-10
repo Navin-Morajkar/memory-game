@@ -16,7 +16,7 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/enter-data" element={<EnterData userInputs={userInputs} setUserInputs={setUserInputs} />} />
           <Route path="/game" element={<MemoryGame userInputs={userInputs} setUserInputs={setUserInputs}/>} />
-          <Route path="/high-scores" element={<HighScores userInputs={userInputs} />} />
+          <Route path="/high-scores" element={<HighScores />} />
         </Routes>
       </div>
     </Router>
