@@ -5,11 +5,13 @@ import SingleCard from './../components/SingleCard';
 import './../App.css';
 import { cardImages } from './../constants/constants';
 
+const defaultDifficulty = 8
+
 const MemoryGame = ({ userInputs, setUserInputs }) => {
 
   // Get the latest user input (difficulty) from the array
   const latestUserInput = userInputs[userInputs.length - 1];
-  const difficulty = latestUserInput ? latestUserInput.difficulty : 8;
+  const difficulty = latestUserInput ? latestUserInput.difficulty : defaultDifficulty;
   
   // Create a new array of card images based on the entered difficulty
   const selectedCardImages = cardImages.slice(0, difficulty);
@@ -89,7 +91,11 @@ const MemoryGame = ({ userInputs, setUserInputs }) => {
         setGameEnded(true);
       }
     }
-  }, [cards]);        
+  }, [cards]);     
+  
+  useEffect(()=>{
+    shuffleCards()
+  },[])
 
     
   //console.log(cards)

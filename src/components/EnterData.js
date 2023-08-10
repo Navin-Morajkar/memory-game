@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import HighScores from './HighScores';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const EnterData = ({ userInputs, setUserInputs }) => {
+const EnterData = ({updateUserInputs }) => {
     const [name, setName] = useState('');
     const [difficulty, setDifficulty] = useState('');
     const [score, setScore] = useState(0);
@@ -12,7 +10,8 @@ const EnterData = ({ userInputs, setUserInputs }) => {
     const handleSubmit = (e) => {
       e.preventDefault();
       const userInput = { name, difficulty, score };
-      setUserInputs((prevUserInputs) => [...prevUserInputs, userInput]);
+
+      updateUserInputs(userInput);
   
       // Clear the input fields after submission
       setName('');
