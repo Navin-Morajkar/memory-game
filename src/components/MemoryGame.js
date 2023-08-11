@@ -37,12 +37,8 @@ const MemoryGame = ({ userInputs, setUserInputs }) => {
     setTurns(0);
   };
 
-
-  //console.log(cards,turns)
-
   //Choice
   const handleChoice = (card) => {
-    //console.log(card)
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
   }
 
@@ -64,10 +60,8 @@ const MemoryGame = ({ userInputs, setUserInputs }) => {
           })
         })
         resetChoice()
-
         
       } else{
-        //console.log("No Match")
         setTimeout(() => resetChoice(), 1000)
       }
     }
@@ -97,10 +91,7 @@ const MemoryGame = ({ userInputs, setUserInputs }) => {
     shuffleCards()
   },[])
 
-    
-  //console.log(cards)
-
-  //reset choices and add nos of moves
+  //Reset choices and add nos of moves
   const resetChoice = () => {
     setChoiceOne(null)
     setChoiceTwo(null)
@@ -140,10 +131,7 @@ const MemoryGame = ({ userInputs, setUserInputs }) => {
               <p>Turns: {turns}</p>
             </>
         )}
-    </div>
-              
-            
-          
+    </div>       
   );
 };
 

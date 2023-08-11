@@ -17,17 +17,10 @@ const EnterData = ({updateUserInputs }) => {
       setName('');
       setDifficulty('');
       setScore(0);
-
-      //localStorage.setItem('userInputs', JSON.stringify(userInputs));
         
       // Navigate to the "/game" route after submitting the form
       navigate('/game');
-    };
-    
-    // useEffect(() => {
-    //     console.log("test");
-    //     localStorage.setItem('userInputs', JSON.stringify(userInputs));
-    // }, [userInputs]);      
+    };   
 
     return (  
         <div>
